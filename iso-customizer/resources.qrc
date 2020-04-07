@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/logo.svg</file>
+        <file>icons/deepin/builtin/fail.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-128px.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-16px.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-24px.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-256.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-32px.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-48px.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-512px.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-64px.svg</file>
+        <file>icons/deepin/builtin/iso定制工具-96px.svg</file>
+        <file>icons/deepin/builtin/NO_active1.svg</file>
+        <file>icons/deepin/builtin/NO_active2.svg</file>
+        <file>icons/deepin/builtin/NO_active3.svg</file>
+        <file>icons/deepin/builtin/NO_active4.svg</file>
+        <file>icons/deepin/builtin/NO_active5.svg</file>
+        <file>icons/deepin/builtin/NO_active6.svg</file>
+        <file>icons/deepin/builtin/NO_active7.svg</file>
+        <file>icons/deepin/builtin/NO_active8.svg</file>
+        <file>icons/deepin/builtin/NO_active9.svg</file>
+        <file>icons/deepin/builtin/NO_inactive1.svg</file>
+        <file>icons/deepin/builtin/NO_inactive2.svg</file>
+        <file>icons/deepin/builtin/NO_inactive3.svg</file>
+        <file>icons/deepin/builtin/NO_inactive4.svg</file>
+        <file>icons/deepin/builtin/NO_inactive5.svg</file>
+        <file>icons/deepin/builtin/NO_inactive6.svg</file>
+        <file>icons/deepin/builtin/NO_inactive7.svg</file>
+        <file>icons/deepin/builtin/NO_inactive8.svg</file>
+        <file>icons/deepin/builtin/NO_inactive9.svg</file>
+        <file>icons/deepin/builtin/progress.svg</file>
+        <file>icons/deepin/builtin/清除.svg</file>
+        <file>icons/deepin/builtin/清除1.svg</file>
+    </qresource>
+</RCC>
