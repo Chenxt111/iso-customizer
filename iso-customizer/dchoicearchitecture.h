@@ -31,6 +31,7 @@ private:
     QStandardItem *pItemMIPS;
 
 signals:
+    void nextBtnCliked();
 
 private slots:
     void CheckIndexChangedSignal(const QModelIndex &current, const QModelIndex &previous);

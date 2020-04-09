@@ -5,6 +5,10 @@
 #include "dprogramconf.h"
 #include "dchoicearchitecture.h"
 #include "dpreparation.h"
+#include "dchoicekernel.h"
+#include "doutput.h"
+#include "dmidterminstallation.h"
+#include "dpostcleaning.h"
 
 #include <DMainWindow>
 #include <DWidget>
@@ -55,13 +59,17 @@ private:
     DProgramConf *m_pProgarmConf;
     DChoiceArchitecture *m_pChoiceArchitecture;
     DPreparation *m_pPreparation;
+    DMidTermInstallation *m_pMidTermInstallation;
+    DPostCleaning *m_pPostCleaning;
+    DChoiceKernel *m_pChoiceKernel;
+    DOutPut *m_pOutPut;
 
     QString m_strConfDir;
     QString m_srConfPath;
 
 private:
     void initUI();
-    void initConnections();
+    void initConnections(QStandardItem *pItem);
     void settingsInit();
 
 private slots:

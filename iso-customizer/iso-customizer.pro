@@ -13,7 +13,10 @@ SOURCES += \
         dpreparation.cpp \
         dprogramconf.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    dchoicekernel.cpp \
+    doutput.cpp \
+    dpostcleaning.cpp
 
 RESOURCES +=         resources.qrc
 
@@ -24,4 +27,7 @@ HEADERS += \
     dmidterminstallation.h \
     dpreparation.h \
     dprogramconf.h \
-    mainwindow.h
+    mainwindow.h \
+    dchoicekernel.h \
+    doutput.h \
+    dpostcleaning.h

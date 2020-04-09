@@ -57,14 +57,20 @@ SOURCES       = ../iso-customizer/dchoicearchitecture.cpp \
 		../iso-customizer/dpreparation.cpp \
 		../iso-customizer/dprogramconf.cpp \
 		../iso-customizer/main.cpp \
-		../iso-customizer/mainwindow.cpp qrc_resources.cpp \
+		../iso-customizer/mainwindow.cpp \
+		../iso-customizer/dchoicekernel.cpp \
+		../iso-customizer/doutput.cpp \
+		../iso-customizer/dpostcleaning.cpp qrc_resources.cpp \
 		moc_dchoicearchitecture.cpp \
 		moc_dchoiceiso.cpp \
 		moc_dlistwidgetclear.cpp \
 		moc_dmidterminstallation.cpp \
 		moc_dpreparation.cpp \
 		moc_dprogramconf.cpp \
-		moc_mainwindow.cpp
+		moc_mainwindow.cpp \
+		moc_dchoicekernel.cpp \
+		moc_doutput.cpp \
+		moc_dpostcleaning.cpp
 OBJECTS       = dchoicearchitecture.o \
 		dchoiceiso.o \
 		dlistwidgetclear.o \
@@ -73,6 +79,9 @@ OBJECTS       = dchoicearchitecture.o \
 		dprogramconf.o \
 		main.o \
 		mainwindow.o \
+		dchoicekernel.o \
+		doutput.o \
+		dpostcleaning.o \
 		qrc_resources.o \
 		moc_dchoicearchitecture.o \
 		moc_dchoiceiso.o \
@@ -80,7 +89,10 @@ OBJECTS       = dchoicearchitecture.o \
 		moc_dmidterminstallation.o \
 		moc_dpreparation.o \
 		moc_dprogramconf.o \
-		moc_mainwindow.o
+		moc_mainwindow.o \
+		moc_dchoicekernel.o \
+		moc_doutput.o \
+		moc_dpostcleaning.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -173,14 +185,20 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../iso-customizer/dmidterminstallation.h \
 		../iso-customizer/dpreparation.h \
 		../iso-customizer/dprogramconf.h \
-		../iso-customizer/mainwindow.h ../iso-customizer/dchoicearchitecture.cpp \
+		../iso-customizer/mainwindow.h \
+		../iso-customizer/dchoicekernel.h \
+		../iso-customizer/doutput.h \
+		../iso-customizer/dpostcleaning.h ../iso-customizer/dchoicearchitecture.cpp \
 		../iso-customizer/dchoiceiso.cpp \
 		../iso-customizer/dlistwidgetclear.cpp \
 		../iso-customizer/dmidterminstallation.cpp \
 		../iso-customizer/dpreparation.cpp \
 		../iso-customizer/dprogramconf.cpp \
 		../iso-customizer/main.cpp \
-		../iso-customizer/mainwindow.cpp
+		../iso-customizer/mainwindow.cpp \
+		../iso-customizer/dchoicekernel.cpp \
+		../iso-customizer/doutput.cpp \
+		../iso-customizer/dpostcleaning.cpp
 QMAKE_TARGET  = iso-customizer
 DESTDIR       = 
 TARGET        = iso-customizer
@@ -407,8 +425,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../iso-customizer/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../iso-customizer/dchoicearchitecture.h ../iso-customizer/dchoiceiso.h ../iso-customizer/dlistwidgetclear.h ../iso-customizer/dmidterminstallation.h ../iso-customizer/dpreparation.h ../iso-customizer/dprogramconf.h ../iso-customizer/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../iso-customizer/dchoicearchitecture.cpp ../iso-customizer/dchoiceiso.cpp ../iso-customizer/dlistwidgetclear.cpp ../iso-customizer/dmidterminstallation.cpp ../iso-customizer/dpreparation.cpp ../iso-customizer/dprogramconf.cpp ../iso-customizer/main.cpp ../iso-customizer/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../iso-customizer/dchoicearchitecture.h ../iso-customizer/dchoiceiso.h ../iso-customizer/dlistwidgetclear.h ../iso-customizer/dmidterminstallation.h ../iso-customizer/dpreparation.h ../iso-customizer/dprogramconf.h ../iso-customizer/mainwindow.h ../iso-customizer/dchoicekernel.h ../iso-customizer/doutput.h ../iso-customizer/dpostcleaning.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../iso-customizer/dchoicearchitecture.cpp ../iso-customizer/dchoiceiso.cpp ../iso-customizer/dlistwidgetclear.cpp ../iso-customizer/dmidterminstallation.cpp ../iso-customizer/dpreparation.cpp ../iso-customizer/dprogramconf.cpp ../iso-customizer/main.cpp ../iso-customizer/mainwindow.cpp ../iso-customizer/dchoicekernel.cpp ../iso-customizer/doutput.cpp ../iso-customizer/dpostcleaning.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -466,9 +484,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	clang++ -pipe -g -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dchoicearchitecture.cpp moc_dchoiceiso.cpp moc_dlistwidgetclear.cpp moc_dmidterminstallation.cpp moc_dpreparation.cpp moc_dprogramconf.cpp moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_dchoicearchitecture.cpp moc_dchoiceiso.cpp moc_dlistwidgetclear.cpp moc_dmidterminstallation.cpp moc_dpreparation.cpp moc_dprogramconf.cpp moc_mainwindow.cpp moc_dchoicekernel.cpp moc_doutput.cpp moc_dpostcleaning.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dchoicearchitecture.cpp moc_dchoiceiso.cpp moc_dlistwidgetclear.cpp moc_dmidterminstallation.cpp moc_dpreparation.cpp moc_dprogramconf.cpp moc_mainwindow.cpp
+	-$(DEL_FILE) moc_dchoicearchitecture.cpp moc_dchoiceiso.cpp moc_dlistwidgetclear.cpp moc_dmidterminstallation.cpp moc_dpreparation.cpp moc_dprogramconf.cpp moc_mainwindow.cpp moc_dchoicekernel.cpp moc_doutput.cpp moc_dpostcleaning.cpp
 moc_dchoicearchitecture.cpp: ../iso-customizer/dchoicearchitecture.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -484,7 +502,8 @@ moc_dlistwidgetclear.cpp: ../iso-customizer/dlistwidgetclear.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cxt/iso-program/iso-customizer/build-iso-customizer-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I/home/cxt/iso-program/iso-customizer/iso-customizer -I/usr/include/libdtk-5.1.1/DWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/libdtk-5.1.0/DGui -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.1.1/DCore -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/include/clang/7.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../iso-customizer/dlistwidgetclear.h -o moc_dlistwidgetclear.cpp
 
-moc_dmidterminstallation.cpp: ../iso-customizer/dmidterminstallation.h \
+moc_dmidterminstallation.cpp: ../iso-customizer/dlistwidgetclear.h \
+		../iso-customizer/dmidterminstallation.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cxt/iso-program/iso-customizer/build-iso-customizer-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I/home/cxt/iso-program/iso-customizer/iso-customizer -I/usr/include/libdtk-5.1.1/DWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/libdtk-5.1.0/DGui -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.1.1/DCore -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/include/clang/7.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../iso-customizer/dmidterminstallation.h -o moc_dmidterminstallation.cpp
@@ -506,10 +525,29 @@ moc_mainwindow.cpp: ../iso-customizer/dchoiceiso.h \
 		../iso-customizer/dlistwidgetclear.h \
 		../iso-customizer/dchoicearchitecture.h \
 		../iso-customizer/dpreparation.h \
+		../iso-customizer/dchoicekernel.h \
+		../iso-customizer/doutput.h \
+		../iso-customizer/dmidterminstallation.h \
 		../iso-customizer/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cxt/iso-program/iso-customizer/build-iso-customizer-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I/home/cxt/iso-program/iso-customizer/iso-customizer -I/usr/include/libdtk-5.1.1/DWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/libdtk-5.1.0/DGui -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.1.1/DCore -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/include/clang/7.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../iso-customizer/mainwindow.h -o moc_mainwindow.cpp
+
+moc_dchoicekernel.cpp: ../iso-customizer/dchoicekernel.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cxt/iso-program/iso-customizer/build-iso-customizer-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I/home/cxt/iso-program/iso-customizer/iso-customizer -I/usr/include/libdtk-5.1.1/DWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/libdtk-5.1.0/DGui -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.1.1/DCore -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/include/clang/7.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../iso-customizer/dchoicekernel.h -o moc_dchoicekernel.cpp
+
+moc_doutput.cpp: ../iso-customizer/doutput.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cxt/iso-program/iso-customizer/build-iso-customizer-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I/home/cxt/iso-program/iso-customizer/iso-customizer -I/usr/include/libdtk-5.1.1/DWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/libdtk-5.1.0/DGui -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.1.1/DCore -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/include/clang/7.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../iso-customizer/doutput.h -o moc_doutput.cpp
+
+moc_dpostcleaning.cpp: ../iso-customizer/dlistwidgetclear.h \
+		../iso-customizer/dpostcleaning.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cxt/iso-program/iso-customizer/build-iso-customizer-unknown-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I/home/cxt/iso-program/iso-customizer/iso-customizer -I/usr/include/libdtk-5.1.1/DWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets/5.11.3/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/libdtk-5.1.0/DGui -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtGui/5.11.3/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtX11Extras -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/libdtk-5.1.1/DCore -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5/QtXml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtConcurrent -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3 -I/usr/include/x86_64-linux-gnu/qt5/QtCore/5.11.3/QtCore -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/include/clang/7.0.1/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../iso-customizer/dpostcleaning.h -o moc_dpostcleaning.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -536,7 +574,8 @@ dchoiceiso.o: ../iso-customizer/dchoiceiso.cpp ../iso-customizer/dchoiceiso.h
 dlistwidgetclear.o: ../iso-customizer/dlistwidgetclear.cpp ../iso-customizer/dlistwidgetclear.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dlistwidgetclear.o ../iso-customizer/dlistwidgetclear.cpp
 
-dmidterminstallation.o: ../iso-customizer/dmidterminstallation.cpp ../iso-customizer/dmidterminstallation.h
+dmidterminstallation.o: ../iso-customizer/dmidterminstallation.cpp ../iso-customizer/dmidterminstallation.h \
+		../iso-customizer/dlistwidgetclear.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dmidterminstallation.o ../iso-customizer/dmidterminstallation.cpp
 
 dpreparation.o: ../iso-customizer/dpreparation.cpp ../iso-customizer/dpreparation.h \
@@ -552,7 +591,10 @@ main.o: ../iso-customizer/main.cpp ../iso-customizer/mainwindow.h \
 		../iso-customizer/dprogramconf.h \
 		../iso-customizer/dlistwidgetclear.h \
 		../iso-customizer/dchoicearchitecture.h \
-		../iso-customizer/dpreparation.h
+		../iso-customizer/dpreparation.h \
+		../iso-customizer/dchoicekernel.h \
+		../iso-customizer/doutput.h \
+		../iso-customizer/dmidterminstallation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../iso-customizer/main.cpp
 
 mainwindow.o: ../iso-customizer/mainwindow.cpp ../iso-customizer/mainwindow.h \
@@ -560,8 +602,21 @@ mainwindow.o: ../iso-customizer/mainwindow.cpp ../iso-customizer/mainwindow.h \
 		../iso-customizer/dprogramconf.h \
 		../iso-customizer/dlistwidgetclear.h \
 		../iso-customizer/dchoicearchitecture.h \
-		../iso-customizer/dpreparation.h
+		../iso-customizer/dpreparation.h \
+		../iso-customizer/dchoicekernel.h \
+		../iso-customizer/doutput.h \
+		../iso-customizer/dmidterminstallation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../iso-customizer/mainwindow.cpp
+
+dchoicekernel.o: ../iso-customizer/dchoicekernel.cpp ../iso-customizer/dchoicekernel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dchoicekernel.o ../iso-customizer/dchoicekernel.cpp
+
+doutput.o: ../iso-customizer/doutput.cpp ../iso-customizer/doutput.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o doutput.o ../iso-customizer/doutput.cpp
+
+dpostcleaning.o: ../iso-customizer/dpostcleaning.cpp ../iso-customizer/dpostcleaning.h \
+		../iso-customizer/dlistwidgetclear.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dpostcleaning.o ../iso-customizer/dpostcleaning.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
@@ -586,6 +641,15 @@ moc_dprogramconf.o: moc_dprogramconf.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_dchoicekernel.o: moc_dchoicekernel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dchoicekernel.o moc_dchoicekernel.cpp
+
+moc_doutput.o: moc_doutput.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_doutput.o moc_doutput.cpp
+
+moc_dpostcleaning.o: moc_dpostcleaning.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dpostcleaning.o moc_dpostcleaning.cpp
 
 ####### Install
 

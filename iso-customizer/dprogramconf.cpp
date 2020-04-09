@@ -79,6 +79,10 @@ DProgramConf::DProgramConf(QWidget *parent)
     pMainLayout->addLayout(pHboxLayout3);
     pMainLayout->addStretch(1);
 
+    connect(pNextBtn, &DPushButton::clicked, this, [=]{
+        emit nextBtnCliked();
+    });
+
     connect(pDListWidgetClear, &DListWidgetClear::indexfoucs, this, &DProgramConf::itemFoucs);
     connect(pDIconButtonClear, &DIconButton::clicked, this, [=]{
         QPoint local = pDIconButtonClear->mapTo(pWidget, pWidget->pos());
@@ -107,7 +111,6 @@ DProgramConf::DProgramConf(QWidget *parent)
     this->setAutoFillBackground(true);
     this->setPalette(pal);
 
-//    setStyleSheet("QWidget{background-color:white;border-radius:8px;}");
 }
 
 void DProgramConf::LinkbuttonClicked()

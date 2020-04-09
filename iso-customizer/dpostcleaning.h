@@ -1,5 +1,5 @@
-#ifndef DPROGRAMCONF_H
-#define DPROGRAMCONF_H
+#ifndef DPOSTCLEANING_H
+#define DPOSTCLEANING_H
 
 #include "dlistwidgetclear.h"
 
@@ -30,11 +30,11 @@
 
 DWIDGET_USE_NAMESPACE
 
-class DProgramConf : public QWidget
+class DPostCleaning : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DProgramConf(QWidget *parent = nullptr);
+    explicit DPostCleaning(QWidget *parent = nullptr);
 
 private:
     QStringList *pFileNameList;
@@ -50,6 +50,7 @@ private:
     QHBoxLayout *pHBLayout;
     DIconButton *pDIconButtonClear;
 
+
 signals:
     void iconBtnCliked(const QPoint &locat);
     void nextBtnCliked();
@@ -60,4 +61,4 @@ private slots:
     void itemFoucs(QMouseEvent *e);
 };
 
-#endif // DPROGRAMCONF_H
+#endif // DPOSTCLEANING_H

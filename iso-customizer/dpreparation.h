@@ -35,6 +35,7 @@ class DPreparation : public QWidget
     Q_OBJECT
 public:
     explicit DPreparation(QWidget *parent = nullptr);
+
 private:
     QStringList *pFileNameList;
     DGroupBox *pCenterBox;
@@ -51,6 +52,7 @@ private:
 
 signals:
     void iconBtnCliked(const QPoint &locat);
+    void nextBtnCliked();
 
 private slots:
     void LinkbuttonClicked();

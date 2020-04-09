@@ -1,6 +1,6 @@
-#include "dpreparation.h"
+#include "dpostcleaning.h"
 
-DPreparation::DPreparation(QWidget *parent)
+DPostCleaning::DPostCleaning(QWidget *parent)
     : QWidget(parent)
     , pFileNameList(new QStringList())
     , pCenterBox(new DGroupBox())
@@ -9,16 +9,16 @@ DPreparation::DPreparation(QWidget *parent)
     , pWidget(new QWidget())
     , pHBLayout(new QHBoxLayout())
     , pMainLayout(new QVBoxLayout())
-    , pCenterLabel(new DLabel(QString(tr("请选择前期准备"))))
+    , pCenterLabel(new DLabel(QString(tr("请选择后期清理"))))
     , pDCommandLinkButtonClear(new DCommandLinkButton(tr("全部清除")))
 {
     pMainLayout->setSpacing(20);
     pMainLayout->addStretch(8);
 
     QHBoxLayout *pDlabelSpace = new QHBoxLayout();
-    DLabel *pDlabel = new DLabel(QString(tr("前期准备")));
+    DLabel *pDlabel = new DLabel(QString(tr("后期清理")));
     pDCommandLinkButtonClear->setHidden(true);
-    connect(pDCommandLinkButtonClear, &DCommandLinkButton::clicked, this, &DPreparation::ClearbuttonClicked);
+    connect(pDCommandLinkButtonClear, &DCommandLinkButton::clicked, this, &DPostCleaning::ClearbuttonClicked);
     QFont fontBold;
     fontBold.setBold(true);
     pDlabel->setFont(fontBold);
@@ -57,7 +57,7 @@ DPreparation::DPreparation(QWidget *parent)
     QHBoxLayout *pHboxLayoutChoice = new QHBoxLayout();
     DCommandLinkButton *pDCommandLinkButtonChoice = new DCommandLinkButton(tr("选择脚本"));
     pDCommandLinkButtonChoice->setHidden(false);
-    connect(pDCommandLinkButtonChoice, &DCommandLinkButton::clicked, this, &DPreparation::LinkbuttonClicked);
+    connect(pDCommandLinkButtonChoice, &DCommandLinkButton::clicked, this, &DPostCleaning::LinkbuttonClicked);
 
     pHboxLayoutChoice->addStretch(1);
     pHboxLayoutChoice->addWidget(pDCommandLinkButtonChoice);
@@ -79,14 +79,14 @@ DPreparation::DPreparation(QWidget *parent)
         emit nextBtnCliked();
     });
 
-    connect(pDListWidgetClear, &DListWidgetClear::indexfoucs, this, &DPreparation::itemFoucs);
+    connect(pDListWidgetClear, &DListWidgetClear::indexfoucs, this, &DPostCleaning::itemFoucs);
     connect(pDIconButtonClear, &DIconButton::clicked, this, [ = ] {
         QPoint local = pDIconButtonClear->mapTo(pWidget, pWidget->pos());
         qDebug() << "locat = " << local;
 
         emit iconBtnCliked(local);
     });
-    connect(this, &DPreparation::iconBtnCliked, pDListWidgetClear, &DListWidgetClear::clearButtnCliked);
+    connect(this, &DPostCleaning::iconBtnCliked, pDListWidgetClear, &DListWidgetClear::clearButtnCliked);
     connect(pDListWidgetClear, &DListWidgetClear::creatWidget, this, [ = ] {
         pWidget = new QWidget() ;
         pWidget->setMouseTracking(true);
@@ -108,7 +108,7 @@ DPreparation::DPreparation(QWidget *parent)
     this->setPalette(pal);
 }
 
-void DPreparation::LinkbuttonClicked()
+void DPostCleaning::LinkbuttonClicked()
 {
     QFileDialog *fileDialog = new QFileDialog(this);
 
@@ -152,7 +152,7 @@ void DPreparation::LinkbuttonClicked()
     }
 }
 
-void DPreparation::ClearbuttonClicked()
+void DPostCleaning::ClearbuttonClicked()
 {
     pFileNameList->clear();
     pDListWidgetClear->clearData();
@@ -166,7 +166,7 @@ void DPreparation::ClearbuttonClicked()
     pDCommandLinkButtonClear->setHidden(true);
 }
 
-void DPreparation::itemFoucs(QMouseEvent *e)
+void DPostCleaning::itemFoucs(QMouseEvent *e)
 {
     for (int i = 0; i < pDListWidgetClear->count() ; i++) {
         QListWidgetItem *sel = pDListWidgetClear->item(i);
@@ -184,3 +184,4 @@ void DPreparation::itemFoucs(QMouseEvent *e)
         pDListWidgetClear->setItemWidget(pDListWidgetClear->itemAt(e->pos()), pWidget);
     }
 }
+

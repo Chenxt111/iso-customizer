@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'dprogramconf.h'
+** Meta object code from reading C++ file 'dpostcleaning.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.11.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../iso-customizer/dprogramconf.h"
+#include "../iso-customizer/dpostcleaning.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'dprogramconf.h' doesn't include <QObject>."
+#error "The header file 'dpostcleaning.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.11.3. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,37 +20,37 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_DProgramConf_t {
+struct qt_meta_stringdata_DPostCleaning_t {
     QByteArrayData data[10];
-    char stringdata0[110];
+    char stringdata0[111];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_DProgramConf_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_DPostCleaning_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_DProgramConf_t qt_meta_stringdata_DProgramConf = {
+static const qt_meta_stringdata_DPostCleaning_t qt_meta_stringdata_DPostCleaning = {
     {
-QT_MOC_LITERAL(0, 0, 12), // "DProgramConf"
-QT_MOC_LITERAL(1, 13, 13), // "iconBtnCliked"
-QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 5), // "locat"
-QT_MOC_LITERAL(4, 34, 13), // "nextBtnCliked"
-QT_MOC_LITERAL(5, 48, 17), // "LinkbuttonClicked"
-QT_MOC_LITERAL(6, 66, 18), // "ClearbuttonClicked"
-QT_MOC_LITERAL(7, 85, 9), // "itemFoucs"
-QT_MOC_LITERAL(8, 95, 12), // "QMouseEvent*"
-QT_MOC_LITERAL(9, 108, 1) // "e"
+QT_MOC_LITERAL(0, 0, 13), // "DPostCleaning"
+QT_MOC_LITERAL(1, 14, 13), // "iconBtnCliked"
+QT_MOC_LITERAL(2, 28, 0), // ""
+QT_MOC_LITERAL(3, 29, 5), // "locat"
+QT_MOC_LITERAL(4, 35, 13), // "nextBtnCliked"
+QT_MOC_LITERAL(5, 49, 17), // "LinkbuttonClicked"
+QT_MOC_LITERAL(6, 67, 18), // "ClearbuttonClicked"
+QT_MOC_LITERAL(7, 86, 9), // "itemFoucs"
+QT_MOC_LITERAL(8, 96, 12), // "QMouseEvent*"
+QT_MOC_LITERAL(9, 109, 1) // "e"
 
     },
-    "DProgramConf\0iconBtnCliked\0\0locat\0"
+    "DPostCleaning\0iconBtnCliked\0\0locat\0"
     "nextBtnCliked\0LinkbuttonClicked\0"
     "ClearbuttonClicked\0itemFoucs\0QMouseEvent*\0"
     "e"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_DProgramConf[] = {
+static const uint qt_meta_data_DPostCleaning[] = {
 
  // content:
        7,       // revision
@@ -84,10 +84,10 @@ static const uint qt_meta_data_DProgramConf[] = {
        0        // eod
 };
 
-void DProgramConf::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void DPostCleaning::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        DProgramConf *_t = static_cast<DProgramConf *>(_o);
+        DPostCleaning *_t = static_cast<DPostCleaning *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->iconBtnCliked((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
@@ -100,15 +100,15 @@ void DProgramConf::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (DProgramConf::*)(const QPoint & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DProgramConf::iconBtnCliked)) {
+            using _t = void (DPostCleaning::*)(const QPoint & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DPostCleaning::iconBtnCliked)) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (DProgramConf::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DProgramConf::nextBtnCliked)) {
+            using _t = void (DPostCleaning::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DPostCleaning::nextBtnCliked)) {
                 *result = 1;
                 return;
             }
@@ -116,26 +116,26 @@ void DProgramConf::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject DProgramConf::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_DProgramConf.data,
-      qt_meta_data_DProgramConf,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject DPostCleaning::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_DPostCleaning.data,
+      qt_meta_data_DPostCleaning,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *DProgramConf::metaObject() const
+const QMetaObject *DPostCleaning::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *DProgramConf::qt_metacast(const char *_clname)
+void *DPostCleaning::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_DProgramConf.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_DPostCleaning.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int DProgramConf::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int DPostCleaning::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -153,14 +153,14 @@ int DProgramConf::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void DProgramConf::iconBtnCliked(const QPoint & _t1)
+void DPostCleaning::iconBtnCliked(const QPoint & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void DProgramConf::nextBtnCliked()
+void DPostCleaning::nextBtnCliked()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

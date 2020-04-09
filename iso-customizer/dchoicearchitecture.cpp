@@ -51,10 +51,10 @@ DChoiceArchitecture::DChoiceArchitecture(QWidget *parent)
     pMainLayout->addLayout(pHboxLayout3);
     pMainLayout->addStretch(1);
 
-//    pListView->currentChanged(QModelIndex());
-//    connect(pListView, &DListView:, this, [=](){
-//        qDebug()<<"123123";
-//    });
+    connect(pNextBtn, &DPushButton::clicked, this, [=]{
+        emit nextBtnCliked();
+    });
+
     connect(pListView, &DListViewRest::currentChange, this, &DChoiceArchitecture::CheckIndexChangedSignal);
     setLayout(pMainLayout);
 }

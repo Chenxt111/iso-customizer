@@ -8,7 +8,7 @@ DChoiceIso::DChoiceIso(QWidget *parent)
     pMainLayout->addStretch(2);
 
     QHBoxLayout *pDlabelSpace = new QHBoxLayout();
-    DLabel *pDlabel = new DLabel(QString(tr("选择ISO:")));
+    DLabel *pDlabel = new DLabel(QString(tr("选择ISO")));
     QFont fontBold;
     fontBold.setBold(true);
     pDlabel->setFont(fontBold);
@@ -37,6 +37,10 @@ DChoiceIso::DChoiceIso(QWidget *parent)
     pHboxLayout3->addStretch(1);
     pMainLayout->addLayout(pHboxLayout3);
     pMainLayout->addStretch(1);
+
+    connect(pNextBtn, &DPushButton::clicked, this, [=]{
+        emit nextBtnCliked();
+    });
 
     this->setLayout(pMainLayout);
 }

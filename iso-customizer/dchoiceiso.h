@@ -24,7 +24,7 @@ public:
     explicit DChoiceIso(QWidget *parent = nullptr);
 
 signals:
-
+    void nextBtnCliked();
 };
 
 #endif // DCHOICEISO_H
