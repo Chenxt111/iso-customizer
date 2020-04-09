@@ -5,8 +5,9 @@ MainWindow::MainWindow(DMainWindow *parent)
     , m_pCentralWidget(new QWidget())
     , m_pStackWidget(new QStackedWidget())
     , m_pChoiceIso(new DChoiceIso)
-    , m_pDGroupBox(new DGroupBox)
     , m_pDListView(new DListView)
+    , m_pChoiceArchitecture(new DChoiceArchitecture)
+    , m_pProgarmConf(new DProgramConf)
 {
     initUI();
     settingsInit();
@@ -16,62 +17,48 @@ MainWindow::MainWindow(DMainWindow *parent)
     const QString str = "ISO定制工具";
     titlebar()->setTitle(str);
 
-    QStandardItemModel *pItemMode = new QStandardItemModel(this);
-//    QAbstractItemModel *pItemMode = new QAbstractItemModel();
-
     QVBoxLayout *pVBoxLayout = new QVBoxLayout();
-    pVBoxLayout->setSpacing(20);
+    pVBoxLayout->setSpacing(40);
 
-    DListWidget *pDListWidget = new DListWidget();
+    QStandardItemModel *pItemModel = new QStandardItemModel(this);
+//    DListWidget *pDListWidget = new DListWidget();
 
-    QListWidgetItem *QListWidgetItem1 = new QListWidgetItem();
-    pDListWidget->addItem(QListWidgetItem1);
-//    QWidget *pWidget1 = new QWidget();
-    QHBoxLayout *pHBLayout1 = new QHBoxLayout();
-    pHBLayout1->setSpacing(10);
-    DPushButton *pItemChoiceISOBtn1 = new DPushButton();
-    pItemChoiceISOBtn1->setMinimumHeight(40);
-    pItemChoiceISOBtn1->setChecked(true);
-    pItemChoiceISOBtn1->setText("选择ISO");
-    pItemChoiceISOBtn1->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive1.svg"));
-    pItemChoiceISOBtn1->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
-
-//    QStandardItem *pItemChoiceISO = new QStandardItem("选择ISO");
-//    DPushButton *pItemChoiceISOBtn1 = new DPushButton();
-//    pItemChoiceISOBtn1->setMinimumHeight(40);
-//    pItemChoiceISOBtn1->setChecked(true);
-//    pItemChoiceISOBtn1->setText("选择ISO");
-//    pItemChoiceISOBtn1->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive1.svg"));
-//    pItemChoiceISOBtn1->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
-//    m_pStackWidget->addWidget(m_pChoiceIso);
-//    m_hash_ItemName_ItemWidget.insert("选择ISO", m_pChoiceIso);
-//    pItemMode->appendRow(pItemChoiceISO);
-//    pHBLayout1->addWidget(pItemChoiceISOBtn1);
-//    pWidget1->setLayout(pHBLayout1);
-//    pWidget1->setMinimumHeight(20);
-//    pDListWidget->setItemWidget(QListWidgetItem1, pWidget1);
-
-
-    QStandardItem *pItemChoiceArchitecture = new QStandardItem("选择架构");
-    DPushButton *pItemChoiceArchitectureBtn = new DPushButton();
-    pItemChoiceArchitectureBtn->setChecked(true);
-    pItemChoiceArchitectureBtn->setText("选择架构");
-    pItemChoiceArchitectureBtn->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive2.svg"));
-    pItemChoiceArchitectureBtn->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+    QStandardItem *pItemchoiceISO = new QStandardItem("选择ISO");
+    pItemchoiceISO->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive1.svg"));
+    pItemchoiceISO->setText(tr("选择ISO"));
+//    pItemchoiceISO->setTristate(false);
+//    pItemchoiceISO->setFlags(Qt::ItemIsEnabled|Qt::ItemIsDropEnabled);
     m_pStackWidget->addWidget(m_pChoiceIso);
-    m_hash_ItemName_ItemWidget.insert("选择架构", m_pChoiceIso);
-    pItemMode->appendRow(pItemChoiceArchitecture);
-//    pVBoxLayout->addWidget(pItemChoiceArchitectureBtn);
+    m_hash_ItemName_ItemWidget.insert("选择ISO", m_pChoiceIso);
+    pItemModel->appendRow(pItemchoiceISO);
 
-//    m_pDGroupBox->setLayout(pVBoxLayout);
-    m_pDListView->setModel(pItemMode);
-    pVBoxLayout->addWidget(pDListWidget);
-    m_pDGroupBox->setLayout(pVBoxLayout);
+    QStandardItem *pItemchoiceArchitecture = new QStandardItem("选择架构");
+    pItemchoiceArchitecture->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive2.svg"));
+    pItemchoiceArchitecture->setText(tr("选择架构"));
+    m_pStackWidget->addWidget(m_pChoiceArchitecture);
+    m_hash_ItemName_ItemWidget.insert("选择架构", m_pChoiceArchitecture);
+    pItemModel->appendRow(pItemchoiceArchitecture);
 
+    QStandardItem *pItemProgramConf = new QStandardItem("程序配置");
+    pItemProgramConf->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive3.svg"));
+    pItemProgramConf->setText(tr("程序配置"));
+    m_pStackWidget->addWidget(m_pProgarmConf);
+    m_hash_ItemName_ItemWidget.insert("程序配置", m_pProgarmConf);
+    pItemModel->appendRow(pItemProgramConf);
+
+    QStandardItem *pItemPreparation = new QStandardItem("前期准备");
+    pItemPreparation->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive4.svg"));
+    pItemPreparation->setText(tr("前期准备"));
+    m_pStackWidget->addWidget(m_pProgarmConf);
+    m_hash_ItemName_ItemWidget.insert("前期准备", m_pProgarmConf);
+    pItemModel->appendRow(pItemPreparation);
+
+    m_pDListView->setModel(pItemModel);
+    m_pDListView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pStackWidget->setCurrentWidget(m_pChoiceIso);
+    connect(m_pDListView, &DListView::clicked, this, &MainWindow::slotListViewItemClicked);
     m_pCentralWidget->setLayout(m_pHBoxLayout);
     setCentralWidget(m_pCentralWidget);
-
 }
 
 MainWindow::~MainWindow()
@@ -87,24 +74,11 @@ void MainWindow::initUI()
 
     m_pHBoxLayout = new QHBoxLayout();
     m_pHBoxLayout->setSpacing(10);
-    m_pDListView->setSpacing(15);
-    m_pHBoxLayout->addWidget(m_pDGroupBox, 3);
+    m_pHBoxLayout->addWidget(m_pDListView, 3);
     m_pHBoxLayout->addWidget(m_pStackWidget, 8);
 
-    DPushButton *btn1 = new DPushButton();
-    btn1->setText("选择iso");
-    btn1->setCheckable(true);
-    btn1->setFixedSize(200, 40);
-    DPushButton *btn2 = new DPushButton();
-    btn2->setText("选择架构");
-    btn2->setCheckable(true);
-    btn2->setFixedSize(200, 40);
+    DFontSizeManager::instance()->bind(m_pDListView, DFontSizeManager::T7);
 
-    QVBoxLayout *vlayout = new QVBoxLayout();
-    vlayout->addWidget(btn1);
-    vlayout->addWidget(btn2);
-
-    m_pDGroupBox->setLayout(vlayout);
 //    m_pDGroupBox->setStyleSheet("QWidget{background-color:white;border-radius:8px;}"); // setStyleSheet(“QWidget{background-color:gray;border-top-left-radius:15px;border-top-right-radius:5px;}”));
 //    m_pStackWidget->setStyleSheet("QWidget{background-color:white;border-radius:8px;}"); // setStyleSheet(“QWidget{background-color:gray;border-top-left-radius:15px;border-top-right-radius:5px;}”));
 }
@@ -119,6 +93,12 @@ void MainWindow::settingsInit()
     qDebug() << "m_strConfDir:" << m_srConfPath;
 }
 
+void MainWindow::slotListViewItemClicked(const QModelIndex &index)
+{
+    QString strItemName = index.data().toString();
+    qDebug() << "strItemName:" << strItemName;
 
+    m_pStackWidget->setCurrentWidget(m_hash_ItemName_ItemWidget.value(strItemName));
+}
 
 

@@ -6,12 +6,18 @@ TARGET = iso-customizer
 TEMPLATE = app
 
 SOURCES += \
+        dchoicearchitecture.cpp \
         dchoiceiso.cpp \
+        dlistwidgetclear.cpp \
+        dprogramconf.cpp \
         main.cpp \
         mainwindow.cpp
 
 RESOURCES +=         resources.qrc
 
 HEADERS += \
+    dchoicearchitecture.h \
     dchoiceiso.h \
+    dlistwidgetclear.h \
+    dprogramconf.h \
     mainwindow.h

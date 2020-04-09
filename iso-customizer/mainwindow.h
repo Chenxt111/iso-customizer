@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include "dchoiceiso.h"
+#include "dprogramconf.h"
+#include "dchoicearchitecture.h"
 
 #include <DMainWindow>
 #include <DWidget>
@@ -13,6 +15,7 @@
 #include <DGroupBox>
 #include <DListWidget>
 #include <DPushButton>
+#include <DFontSizeManager>
 
 #include <QMainWindow>
 #include <QString>
@@ -43,10 +46,11 @@ private:
     QWidget *m_pCentralWidget;
     QStackedWidget *m_pStackWidget;
     DListView *m_pDListView;
-    DGroupBox *m_pDGroupBox;
     QHash<QString, QWidget*> m_hash_ItemName_ItemWidget;
 
     DChoiceIso *m_pChoiceIso;
+    DProgramConf *m_pProgarmConf;
+    DChoiceArchitecture *m_pChoiceArchitecture;
 
     QString m_strConfDir;
     QString m_srConfPath;
@@ -55,6 +59,9 @@ private:
     void initUI();
     void initConnections();
     void settingsInit();
+
+private slots:
+    void slotListViewItemClicked(const QModelIndex &index);
 
 };
 

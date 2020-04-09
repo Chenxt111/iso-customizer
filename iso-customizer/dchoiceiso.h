@@ -11,6 +11,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGridLayout>
+#include <QSpacerItem>
 #include <QDebug>
 #include <QString>
 
