@@ -1,6 +1,6 @@
-#include "dprogramconf.h"
+#include "dpreparation.h"
 
-DProgramConf::DProgramConf(QWidget *parent)
+DPreparation::DPreparation(QWidget *parent)
     : QWidget(parent)
     , pFileNameList(new QStringList())
     , pCenterBox(new DGroupBox())
@@ -9,17 +9,16 @@ DProgramConf::DProgramConf(QWidget *parent)
     , pWidget(new QWidget())
     , pHBLayout(new QHBoxLayout())
     , pMainLayout(new QVBoxLayout())
-    , pCenterLabel(new DLabel(QString(tr("请选择程序"))))
+    , pCenterLabel(new DLabel(QString(tr("请选择前期准备"))))
     , pDCommandLinkButtonClear(new DCommandLinkButton(tr("全部清除")))
 {
     pMainLayout->setSpacing(20);
     pMainLayout->addStretch(8);
 
     QHBoxLayout *pDlabelSpace = new QHBoxLayout();
-    DLabel *pDlabel = new DLabel(QString(tr("程序配置")));
-//    DCommandLinkButton *pDCommandLinkButtonClear = new DCommandLinkButton(tr("全部清除"));
+    DLabel *pDlabel = new DLabel(QString(tr("前期准备")));
     pDCommandLinkButtonClear->setHidden(true);
-    connect(pDCommandLinkButtonClear, &DCommandLinkButton::clicked, this, &DProgramConf::ClearbuttonClicked);
+    connect(pDCommandLinkButtonClear, &DCommandLinkButton::clicked, this, &DPreparation::ClearbuttonClicked);
     QFont fontBold;
     fontBold.setBold(true);
     pDlabel->setFont(fontBold);
@@ -31,9 +30,7 @@ DProgramConf::DProgramConf(QWidget *parent)
     pDlabelSpace->addStretch(1);
     pMainLayout->addLayout(pDlabelSpace);
 
-//    pListVBox->setFixedHeight(350);
     pDListWidgetClear->setFixedHeight(350);
-//    pMainLayout->addWidget(pListVBox);
 
     DFontSizeManager::instance()->bind(pCenterLabel, DFontSizeManager::T2);
     DPalette pa = DApplicationHelper::instance()->palette(pCenterLabel);
@@ -42,7 +39,6 @@ DProgramConf::DProgramConf(QWidget *parent)
     pCenterLabel->setPalette(pa);
     pCenterLabel->setAlignment(Qt::AlignCenter);
     pCenterLabel->setFixedHeight(350);
-//    pCenterLabel->setHidden(true);
     pMainLayout->addWidget(pCenterLabel);
 
     pWidget->setMouseTracking(true);
@@ -59,9 +55,9 @@ DProgramConf::DProgramConf(QWidget *parent)
     pWidget->setLayout(pHBLayout);
 
     QHBoxLayout *pHboxLayoutChoice = new QHBoxLayout();
-    DCommandLinkButton *pDCommandLinkButtonChoice = new DCommandLinkButton(tr("选择程序deb包"));
+    DCommandLinkButton *pDCommandLinkButtonChoice = new DCommandLinkButton(tr("选择脚本"));
     pDCommandLinkButtonChoice->setHidden(false);
-    connect(pDCommandLinkButtonChoice, &DCommandLinkButton::clicked, this, &DProgramConf::LinkbuttonClicked);
+    connect(pDCommandLinkButtonChoice, &DCommandLinkButton::clicked, this, &DPreparation::LinkbuttonClicked);
 
     pHboxLayoutChoice->addStretch(1);
     pHboxLayoutChoice->addWidget(pDCommandLinkButtonChoice);
@@ -79,20 +75,21 @@ DProgramConf::DProgramConf(QWidget *parent)
     pMainLayout->addLayout(pHboxLayout3);
     pMainLayout->addStretch(1);
 
-    connect(pDListWidgetClear, &DListWidgetClear::indexfoucs, this, &DProgramConf::itemFoucs);
-    connect(pDIconButtonClear, &DIconButton::clicked, this, [=]{
+    connect(pDListWidgetClear, &DListWidgetClear::indexfoucs, this, &DPreparation::itemFoucs);
+    connect(pDIconButtonClear, &DIconButton::clicked, this, [ = ] {
         QPoint local = pDIconButtonClear->mapTo(pWidget, pWidget->pos());
         qDebug() << "locat = " << local;
 
         emit iconBtnCliked(local);
     });
-    connect(this, &DProgramConf::iconBtnCliked, pDListWidgetClear, &DListWidgetClear::clearButtnCliked);
-    connect(pDListWidgetClear, &DListWidgetClear::creatWidget, this, [=]{
-        pWidget = new QWidget () ;
+    connect(this, &DPreparation::iconBtnCliked, pDListWidgetClear, &DListWidgetClear::clearButtnCliked);
+    connect(pDListWidgetClear, &DListWidgetClear::creatWidget, this, [ = ] {
+        pWidget = new QWidget() ;
         pWidget->setMouseTracking(true);
         pWidget->setLayout(pHBLayout);
 
-        if (pDListWidgetClear->count() == 0) {
+        if (pDListWidgetClear->count() == 0)
+        {
             pDListWidgetClear->setHidden(true);
             pCenterLabel->setHidden(false);
             pDCommandLinkButtonClear->setHidden(true);
@@ -101,46 +98,43 @@ DProgramConf::DProgramConf(QWidget *parent)
 
     setLayout(pMainLayout);
 
-
     QPalette pal(this->palette());
     pal.setColor(QPalette::Background, Qt::white);
     this->setAutoFillBackground(true);
     this->setPalette(pal);
-
-//    setStyleSheet("QWidget{background-color:white;border-radius:8px;}");
 }
 
-void DProgramConf::LinkbuttonClicked()
+void DPreparation::LinkbuttonClicked()
 {
     QFileDialog *fileDialog = new QFileDialog(this);
 
     //设置默认文件路径
     fileDialog->setDirectory("/home/cxt");
     //设置文件过滤器
-    fileDialog->setNameFilter(tr("*.deb"));
+    fileDialog->setNameFilter(tr("*.job"));
     //设置可以选择多个文件,默认为只能选择一个文件QFileDialog::ExistingFiles
     fileDialog->setFileMode(QFileDialog::ExistingFiles);
     //设置视图模式
     fileDialog->setViewMode(QFileDialog::Detail);
     //打印所有选择的文件的路径
     QStringList fileNames;
-    if ( fileDialog->exec() ) {
-       fileNames = fileDialog->selectedFiles();
+    if (fileDialog->exec()) {
+        fileNames = fileDialog->selectedFiles();
     }
     if (!pFileNameList->isEmpty()) {
         pFileNameList->clear();
     }
-    for ( auto tmp : fileNames ) {
-       qDebug() << tmp << endl;
-       pFileNameList->push_front(tmp);
+    for (auto tmp : fileNames) {
+        qDebug() << tmp << endl;
+        pFileNameList->push_front(tmp);
     }
 
-    if ( !pFileNameList->isEmpty() ) {
+    if (!pFileNameList->isEmpty()) {
         pCenterLabel->setHidden(true);
         pDListWidgetClear->setHidden(false);
         pMainLayout->insertWidget(2, pDListWidgetClear);
-        for ( auto tmp : *pFileNameList ) {
-            QListWidgetItem *pItemtmp= new QListWidgetItem(tmp);
+        for (auto tmp : *pFileNameList) {
+            QListWidgetItem *pItemtmp = new QListWidgetItem(tmp);
             QFileIconProvider icon;
             pItemtmp->setIcon(icon.icon(tmp));
             pItemtmp->setSizeHint(QSize(540, 50));
@@ -154,12 +148,12 @@ void DProgramConf::LinkbuttonClicked()
     }
 }
 
-void DProgramConf::ClearbuttonClicked()
+void DPreparation::ClearbuttonClicked()
 {
     pFileNameList->clear();
     pDListWidgetClear->clearData();
 
-    pWidget = new QWidget () ;
+    pWidget = new QWidget() ;
     pWidget->setMouseTracking(true);
     pWidget->setLayout(pHBLayout);
 
@@ -168,23 +162,21 @@ void DProgramConf::ClearbuttonClicked()
     pDCommandLinkButtonClear->setHidden(true);
 }
 
-void DProgramConf::itemFoucs(QMouseEvent *e)
+void DPreparation::itemFoucs(QMouseEvent *e)
 {
-    for(int i = 0; i < pDListWidgetClear->count() ; i++) {
+    for (int i = 0; i < pDListWidgetClear->count() ; i++) {
         QListWidgetItem *sel = pDListWidgetClear->item(i);
 
         if (pDListWidgetClear->itemWidget(sel)) {
             pDListWidgetClear->removeItemWidget(sel);
-            pWidget = new QWidget () ;
+            pWidget = new QWidget() ;
             pWidget->setMouseTracking(true);
             pWidget->setLayout(pHBLayout);
         }
         sel = nullptr;
         delete sel;
     }
-    if ( pDListWidgetClear->itemAt(e->pos()) ) {
-//        qDebug() << "11111111";
-//        qDebug() << "pwidget = "<<pWidget;
+    if (pDListWidgetClear->itemAt(e->pos())) {
         pDListWidgetClear->setItemWidget(pDListWidgetClear->itemAt(e->pos()), pWidget);
     }
 }

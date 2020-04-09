@@ -4,6 +4,7 @@
 #include "dchoiceiso.h"
 #include "dprogramconf.h"
 #include "dchoicearchitecture.h"
+#include "dpreparation.h"
 
 #include <DMainWindow>
 #include <DWidget>
@@ -44,6 +45,8 @@ public:
 private:
     QHBoxLayout *m_pHBoxLayout;
     QWidget *m_pCentralWidget;
+    QWidget *m_pViewWidget;
+    QVBoxLayout *m_pListVBoxLayout;
     QStackedWidget *m_pStackWidget;
     DListView *m_pDListView;
     QHash<QString, QWidget*> m_hash_ItemName_ItemWidget;
@@ -51,6 +54,7 @@ private:
     DChoiceIso *m_pChoiceIso;
     DProgramConf *m_pProgarmConf;
     DChoiceArchitecture *m_pChoiceArchitecture;
+    DPreparation *m_pPreparation;
 
     QString m_strConfDir;
     QString m_srConfPath;

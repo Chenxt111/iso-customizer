@@ -2,12 +2,15 @@
 
 MainWindow::MainWindow(DMainWindow *parent)
     : DMainWindow(parent)
+    , m_pViewWidget(new QWidget())
+    , m_pListVBoxLayout(new QVBoxLayout())
     , m_pCentralWidget(new QWidget())
     , m_pStackWidget(new QStackedWidget())
     , m_pChoiceIso(new DChoiceIso)
     , m_pDListView(new DListView)
     , m_pChoiceArchitecture(new DChoiceArchitecture)
     , m_pProgarmConf(new DProgramConf)
+    , m_pPreparation(new DPreparation)
 {
     initUI();
     settingsInit();
@@ -49,14 +52,29 @@ MainWindow::MainWindow(DMainWindow *parent)
     QStandardItem *pItemPreparation = new QStandardItem("前期准备");
     pItemPreparation->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive4.svg"));
     pItemPreparation->setText(tr("前期准备"));
-    m_pStackWidget->addWidget(m_pProgarmConf);
-    m_hash_ItemName_ItemWidget.insert("前期准备", m_pProgarmConf);
+    m_pStackWidget->addWidget(m_pPreparation);
+    m_hash_ItemName_ItemWidget.insert("前期准备", m_pPreparation);
     pItemModel->appendRow(pItemPreparation);
+
+    QStandardItem *pItemMidTermInstallation = new QStandardItem("中期安装");
+    pItemMidTermInstallation->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive5.svg"));
+    pItemMidTermInstallation->setText(tr("中期安装"));
+    m_pStackWidget->addWidget(m_pPreparation);
+    m_hash_ItemName_ItemWidget.insert("中期安装", m_pPreparation);
+    pItemModel->appendRow(pItemMidTermInstallation);
+
+    QStandardItem *pItemPostCleaning = new QStandardItem("后期清理");
+    pItemPostCleaning->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive6.svg"));
+    pItemPostCleaning->setText(tr("后期清理"));
+    m_pStackWidget->addWidget(m_pPreparation);
+    m_hash_ItemName_ItemWidget.insert("后期清理", m_pPreparation);
+    pItemModel->appendRow(pItemPostCleaning);
 
     m_pDListView->setModel(pItemModel);
     m_pDListView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pStackWidget->setCurrentWidget(m_pChoiceIso);
     connect(m_pDListView, &DListView::clicked, this, &MainWindow::slotListViewItemClicked);
+
     m_pCentralWidget->setLayout(m_pHBoxLayout);
     setCentralWidget(m_pCentralWidget);
 }
@@ -72,15 +90,17 @@ void MainWindow::initUI()
     // 设置禁止最大化
     this->setFixedSize(807, 607);
 
+    m_pListVBoxLayout->addWidget(m_pDListView);
+    m_pViewWidget->setLayout(m_pListVBoxLayout);
     m_pHBoxLayout = new QHBoxLayout();
     m_pHBoxLayout->setSpacing(10);
     m_pHBoxLayout->addWidget(m_pDListView, 3);
     m_pHBoxLayout->addWidget(m_pStackWidget, 8);
 
     DFontSizeManager::instance()->bind(m_pDListView, DFontSizeManager::T7);
+    m_pDListView->setStyleSheet("QWidget{background-color:White;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}");
+    m_pStackWidget->setStyleSheet("QStackedWidget{background-color:White;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}");
 
-//    m_pDGroupBox->setStyleSheet("QWidget{background-color:white;border-radius:8px;}"); // setStyleSheet(“QWidget{background-color:gray;border-top-left-radius:15px;border-top-right-radius:5px;}”));
-//    m_pStackWidget->setStyleSheet("QWidget{background-color:white;border-radius:8px;}"); // setStyleSheet(“QWidget{background-color:gray;border-top-left-radius:15px;border-top-right-radius:5px;}”));
 }
 
 void MainWindow::settingsInit()

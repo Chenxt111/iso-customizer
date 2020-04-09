@@ -9,6 +9,8 @@ SOURCES += \
         dchoicearchitecture.cpp \
         dchoiceiso.cpp \
         dlistwidgetclear.cpp \
+        dmidterminstallation.cpp \
+        dpreparation.cpp \
         dprogramconf.cpp \
         main.cpp \
         mainwindow.cpp
@@ -19,5 +21,7 @@ HEADERS += \
     dchoicearchitecture.h \
     dchoiceiso.h \
     dlistwidgetclear.h \
+    dmidterminstallation.h \
+    dpreparation.h \
     dprogramconf.h \
     mainwindow.h

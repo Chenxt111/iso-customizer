@@ -1,5 +1,5 @@
-#ifndef DPROGRAMCONF_H
-#define DPROGRAMCONF_H
+#ifndef DPREPARATION_H
+#define DPREPARATION_H
 
 #include "dlistwidgetclear.h"
 
@@ -30,12 +30,11 @@
 
 DWIDGET_USE_NAMESPACE
 
-class DProgramConf : public QWidget
+class DPreparation : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DProgramConf(QWidget *parent = nullptr);
-
+    explicit DPreparation(QWidget *parent = nullptr);
 private:
     QStringList *pFileNameList;
     DGroupBox *pCenterBox;
@@ -59,4 +58,4 @@ private slots:
     void itemFoucs(QMouseEvent *e);
 };
 
-#endif // DPROGRAMCONF_H
+#endif // DPREPARATION_H
