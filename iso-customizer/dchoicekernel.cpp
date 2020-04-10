@@ -55,6 +55,7 @@ DChoiceKernel::DChoiceKernel(QWidget *parent)
     QHBoxLayout *pHboxLayout3 = new QHBoxLayout();
     DPushButton *pNextBtn = new DPushButton();
     pNextBtn->setText(tr("下一步"));
+    pNextBtn->setEnabled(false);
     pNextBtn->setFixedSize(260, 35);
     pHboxLayout3->addStretch(1);
     pHboxLayout3->addWidget(pNextBtn);
@@ -64,6 +65,30 @@ DChoiceKernel::DChoiceKernel(QWidget *parent)
 
     connect(pNextBtn, &DPushButton::clicked, this, [=]{
         emit nextBtnCliked();
+    });
+    connect(pDKernelChooserEdit, &DFileChooserEdit::textChanged, this, [=] {
+        QFileInfo fileinfo(pDKernelChooserEdit->text());
+        if( (!pDKernelChooserEdit->text().isEmpty()) && (fileinfo.isFile()) ) {
+            pDKernelChooserEdit->setAlert(false);
+            if ( (!pDInirtdChooserEdit->text().isEmpty()) && ( !pDInirtdChooserEdit->isAlert()) ) {
+                pNextBtn->setEnabled(true);
+            }
+        } else {
+            pNextBtn->setEnabled(false);
+            pDKernelChooserEdit->setAlert(true);
+        }
+    });
+    connect(pDInirtdChooserEdit, &DFileChooserEdit::textChanged, this, [=] {
+        QFileInfo fileinfo(pDInirtdChooserEdit->text());
+        if( (!pDInirtdChooserEdit->text().isEmpty()) && (fileinfo.isFile()) ) {
+            pDInirtdChooserEdit->setAlert(false);
+            if ( (!pDKernelChooserEdit->text().isEmpty()) && ( !pDKernelChooserEdit->isAlert()) ) {
+                pNextBtn->setEnabled(true);
+            }
+        } else {
+            pNextBtn->setEnabled(false);
+            pDInirtdChooserEdit->setAlert(true);
+        }
     });
 
     this->setLayout(pMainLayout);

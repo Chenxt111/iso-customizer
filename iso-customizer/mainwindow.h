@@ -22,6 +22,7 @@
 #include <DPushButton>
 #include <DFontSizeManager>
 
+#include <QModelIndex>
 #include <QMainWindow>
 #include <QString>
 #include <QDir>
@@ -53,6 +54,7 @@ private:
     QVBoxLayout *m_pListVBoxLayout;
     QStackedWidget *m_pStackWidget;
     DListView *m_pDListView;
+    QStandardItemModel *pItemModel;
     QHash<QString, QWidget*> m_hash_ItemName_ItemWidget;
 
     DChoiceIso *m_pChoiceIso;
@@ -67,6 +69,14 @@ private:
     QString m_strConfDir;
     QString m_srConfPath;
 
+    bool pItemchoiceArchitectureflag;
+    bool pItemProgramConfflag;
+    bool pItemPreparationflag;
+    bool pItemMidTermInstallationflag;
+    bool pItemPostCleaningflag;
+    bool pItemChoiceKernelflag;
+    bool pItemOutPutflag;
+
 private:
     void initUI();
     void initConnections(QStandardItem *pItem);
@@ -74,6 +84,7 @@ private:
 
 private slots:
     void slotListViewItemClicked(const QModelIndex &index);
+    void slotListViewItemChange();
 
 };
 

@@ -79,6 +79,7 @@ DPreparation::DPreparation(QWidget *parent)
         emit nextBtnCliked();
     });
 
+
     connect(pDListWidgetClear, &DListWidgetClear::indexfoucs, this, &DPreparation::itemFoucs);
     connect(pDIconButtonClear, &DIconButton::clicked, this, [ = ] {
         QPoint local = pDIconButtonClear->mapTo(pWidget, pWidget->pos());

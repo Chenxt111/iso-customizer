@@ -14,6 +14,7 @@
 #include <QSpacerItem>
 #include <QDebug>
 #include <QString>
+#include <QFileInfo>
 
 DWIDGET_USE_NAMESPACE
 

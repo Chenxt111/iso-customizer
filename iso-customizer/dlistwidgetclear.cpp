@@ -6,6 +6,7 @@ DListWidgetClear::DListWidgetClear(QWidget *parent)
     this->setSpacing(5);
     this->setMouseTracking(true);
     this->setStyleSheet("QListWidget::item::hover{background-color:rgba(0,0,0,0.05)}");
+//                        "QListWidget::item:selected{background-color:rgba(0,0,0,0.05)};");
 }
 
 void DListWidgetClear::mouseMoveEvent(QMouseEvent *e)

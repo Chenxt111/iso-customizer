@@ -8,6 +8,7 @@
 
 #include <QWidget>
 #include <QStringList>
+#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 

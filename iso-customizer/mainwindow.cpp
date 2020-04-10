@@ -15,6 +15,13 @@ MainWindow::MainWindow(DMainWindow *parent)
     , m_pPostCleaning(new DPostCleaning)
     , m_pChoiceKernel(new DChoiceKernel)
     , m_pOutPut(new DOutPut)
+    , pItemchoiceArchitectureflag(false)
+    , pItemProgramConfflag(false)
+    , pItemPreparationflag(false)
+    , pItemMidTermInstallationflag(false)
+    , pItemPostCleaningflag(false)
+    , pItemChoiceKernelflag(false)
+    , pItemOutPutflag(false)
 {
     initUI();
     settingsInit();
@@ -27,7 +34,7 @@ MainWindow::MainWindow(DMainWindow *parent)
     QVBoxLayout *pVBoxLayout = new QVBoxLayout();
     pVBoxLayout->setSpacing(40);
 
-    QStandardItemModel *pItemModel = new QStandardItemModel(this);
+    pItemModel = new QStandardItemModel(this);
 //    DListWidget *pDListWidget = new DListWidget();
 
     QStandardItem *pItemchoiceISO = new QStandardItem("选择ISO");
@@ -41,6 +48,7 @@ MainWindow::MainWindow(DMainWindow *parent)
     pItemchoiceArchitecture->setIcon(QIcon(":/icons/deepin/builtin/NO_inactive2.svg"));
     pItemchoiceArchitecture->setText(tr("选择架构"));
     pItemchoiceArchitecture->setEnabled(false);
+//    pItemchoiceArchitecture->setToolTip("1111");
     m_pStackWidget->addWidget(m_pChoiceArchitecture);
     m_hash_ItemName_ItemWidget.insert("选择架构", m_pChoiceArchitecture);
     pItemModel->appendRow(pItemchoiceArchitecture);
@@ -94,46 +102,20 @@ MainWindow::MainWindow(DMainWindow *parent)
     pItemModel->appendRow(pItemOutPut);
 
     m_pDListView->setModel(pItemModel);
+    m_pDListView->setCurrentIndex(m_pDListView->model()->index(0, 0));
     m_pDListView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pStackWidget->setCurrentWidget(m_pChoiceIso);
     connect(m_pDListView, &DListView::clicked, this, &MainWindow::slotListViewItemClicked);
     m_pDListView->setShortcutEnabled(2, false);
 
-    connect(m_pChoiceIso, &DChoiceIso::nextBtnCliked, this, [=]{
-        pItemchoiceISO->setCheckState(Qt::Checked);
-        pItemchoiceArchitecture->setEnabled(true);
-        m_pDListView->clicked(pItemchoiceArchitecture->index());
-    });
-    connect(m_pChoiceArchitecture, &DChoiceArchitecture::nextBtnCliked, this, [=]{
-        pItemchoiceArchitecture->setCheckState(Qt::Checked);
-        pItemProgramConf->setEnabled(true);
-        m_pDListView->clicked(pItemProgramConf->index());
-    });
-    connect(m_pProgarmConf, &DProgramConf::nextBtnCliked, this, [=]{
-        pItemProgramConf->setCheckState(Qt::Checked);
-        pItemPreparation->setEnabled(true);
-        m_pDListView->clicked(pItemPreparation->index());
-    });
-    connect(m_pPreparation, &DPreparation::nextBtnCliked, this, [=]{
-        pItemPreparation->setCheckState(Qt::Checked);
-        pItemMidTermInstallation->setEnabled(true);
-        m_pDListView->clicked(pItemMidTermInstallation->index());
-    });
-    connect(m_pMidTermInstallation, &DMidTermInstallation::nextBtnCliked, this, [=]{
-        pItemMidTermInstallation->setCheckState(Qt::Checked);
-        pItemPostCleaning->setEnabled(true);
-        m_pDListView->clicked(pItemPostCleaning->index());
-    });
-    connect(m_pPostCleaning, &DPostCleaning::nextBtnCliked, this, [=]{
-        pItemPostCleaning->setCheckState(Qt::Checked);
-        pItemChoiceKernel->setEnabled(true);
-        m_pDListView->clicked(pItemChoiceKernel->index());
-    });
-    connect(m_pChoiceKernel, &DChoiceKernel::nextBtnCliked, this, [=]{
-        pItemChoiceKernel->setCheckState(Qt::Checked);
-        pItemOutPut->setEnabled(true);
-        m_pDListView->clicked(pItemOutPut->index());
-    });
+
+    connect(m_pChoiceIso, &DChoiceIso::nextBtnCliked, this, &MainWindow::slotListViewItemChange);
+    connect(m_pChoiceArchitecture, &DChoiceArchitecture::nextBtnCliked, this, &MainWindow::slotListViewItemChange);
+    connect(m_pProgarmConf, &DProgramConf::nextBtnCliked, this, &MainWindow::slotListViewItemChange);
+    connect(m_pPreparation, &DPreparation::nextBtnCliked, this, &MainWindow::slotListViewItemChange);
+    connect(m_pMidTermInstallation, &DMidTermInstallation::nextBtnCliked, this, &MainWindow::slotListViewItemChange);
+    connect(m_pPostCleaning, &DPostCleaning::nextBtnCliked, this, &MainWindow::slotListViewItemChange);
+    connect(m_pChoiceKernel, &DChoiceKernel::nextBtnCliked, this, &MainWindow::slotListViewItemChange);
     connect(m_pOutPut, &DOutPut::nextBtnCliked, this, [=]{
         pItemOutPut->setCheckState(Qt::Checked);
     });
@@ -188,7 +170,36 @@ void MainWindow::slotListViewItemClicked(const QModelIndex &index)
     QString strItemName = index.data().toString();
     qDebug() << "strItemName:" << strItemName;
 
-    m_pStackWidget->setCurrentWidget(m_hash_ItemName_ItemWidget.value(strItemName));
+    QModelIndex tempModel = index;
+    QStandardItem *tempItem = pItemModel->itemFromIndex(tempModel);
+
+//    m_pStackWidget->setCurrentWidget(m_hash_ItemName_ItemWidget.value(strItemName));
+    if(tempItem->isEnabled())
+    {
+        m_pStackWidget->setCurrentWidget(m_hash_ItemName_ItemWidget.value(strItemName));
+    }
 }
+
+void MainWindow::slotListViewItemChange()
+{
+    int row = m_pDListView->currentIndex().row();
+
+    QModelIndex tempModel = m_pDListView->model()->index(row, 0);
+    QStandardItem *tempItem = pItemModel->itemFromIndex(tempModel);
+    if( !tempItem->checkState() ) {
+        tempItem->setCheckState(Qt::Checked);
+    }
+
+    row++;
+
+    QModelIndex tempModel1 = m_pDListView->model()->index(row, 0);
+    QStandardItem *tempItem1 = pItemModel->itemFromIndex(tempModel1);
+    tempItem1->setEnabled(true);
+    m_pDListView->setCurrentIndex(tempModel1);
+    m_pDListView->clicked(tempItem1->index());
+
+    m_pStackWidget->setCurrentWidget(m_hash_ItemName_ItemWidget.value(tempItem1->text()));
+}
+
 
 

@@ -20,6 +20,9 @@ DChoiceIso::DChoiceIso(QWidget *parent)
 
     QHBoxLayout *pHBoxLayout2 = new QHBoxLayout();
     DFileChooserEdit *pDFileChooserEdit = new DFileChooserEdit();
+    QStringList nameFilter;
+    nameFilter.push_back(tr("*.iso"));
+    pDFileChooserEdit->setNameFilters(nameFilter);
     pDFileChooserEdit->setFixedSize(500, 35);
     pHBoxLayout2->addStretch(1);
     pHBoxLayout2->addWidget(pDFileChooserEdit);
@@ -30,6 +33,7 @@ DChoiceIso::DChoiceIso(QWidget *parent)
 
     QHBoxLayout *pHboxLayout3 = new QHBoxLayout();
     DPushButton *pNextBtn = new DPushButton();
+    pNextBtn->setEnabled(false);
     pNextBtn->setText(tr("下一步"));
     pNextBtn->setFixedSize(260, 35);
     pHboxLayout3->addStretch(1);
@@ -38,6 +42,16 @@ DChoiceIso::DChoiceIso(QWidget *parent)
     pMainLayout->addLayout(pHboxLayout3);
     pMainLayout->addStretch(1);
 
+    connect(pDFileChooserEdit, &DFileChooserEdit::textChanged, this, [=] {
+        QFileInfo fileinfo(pDFileChooserEdit->text());
+        if( (!pDFileChooserEdit->text().isEmpty()) && (fileinfo.isFile()) ) {
+            pNextBtn->setEnabled(true);
+            pDFileChooserEdit->setAlert(false);
+        } else {
+            pNextBtn->setEnabled(false);
+            pDFileChooserEdit->setAlert(true);
+        }
+    });
     connect(pNextBtn, &DPushButton::clicked, this, [=]{
         emit nextBtnCliked();
     });

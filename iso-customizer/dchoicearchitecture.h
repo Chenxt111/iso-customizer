@@ -30,6 +30,8 @@ private:
     QStandardItem *pItemX86;
     QStandardItem *pItemMIPS;
 
+    DPushButton *pNextBtn;
+
 signals:
     void nextBtnCliked();
 

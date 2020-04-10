@@ -42,9 +42,10 @@ DChoiceArchitecture::DChoiceArchitecture(QWidget *parent)
     pMainLayout->addStretch(15);
 
     QHBoxLayout *pHboxLayout3 = new QHBoxLayout();
-    DPushButton *pNextBtn = new DPushButton();
+    pNextBtn = new DPushButton();
     pNextBtn->setText(tr("下一步"));
     pNextBtn->setFixedSize(260, 35);
+    pNextBtn->setEnabled(false);
     pHboxLayout3->addStretch(1);
     pHboxLayout3->addWidget(pNextBtn);
     pHboxLayout3->addStretch(1);
@@ -61,6 +62,8 @@ DChoiceArchitecture::DChoiceArchitecture(QWidget *parent)
 
 void DChoiceArchitecture::CheckIndexChangedSignal(const QModelIndex &current, const QModelIndex &previous)
 {
+    pNextBtn->setEnabled(true);
+
     switch (previous.row()) {
         case 0: pItemARM->setCheckState(Qt::Unchecked);
             break;
