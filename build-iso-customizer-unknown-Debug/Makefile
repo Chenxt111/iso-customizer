@@ -528,6 +528,7 @@ moc_mainwindow.cpp: ../iso-customizer/dchoiceiso.h \
 		../iso-customizer/dchoicekernel.h \
 		../iso-customizer/doutput.h \
 		../iso-customizer/dmidterminstallation.h \
+		../iso-customizer/dpostcleaning.h \
 		../iso-customizer/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -594,7 +595,8 @@ main.o: ../iso-customizer/main.cpp ../iso-customizer/mainwindow.h \
 		../iso-customizer/dpreparation.h \
 		../iso-customizer/dchoicekernel.h \
 		../iso-customizer/doutput.h \
-		../iso-customizer/dmidterminstallation.h
+		../iso-customizer/dmidterminstallation.h \
+		../iso-customizer/dpostcleaning.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../iso-customizer/main.cpp
 
 mainwindow.o: ../iso-customizer/mainwindow.cpp ../iso-customizer/mainwindow.h \
@@ -605,7 +607,8 @@ mainwindow.o: ../iso-customizer/mainwindow.cpp ../iso-customizer/mainwindow.h \
 		../iso-customizer/dpreparation.h \
 		../iso-customizer/dchoicekernel.h \
 		../iso-customizer/doutput.h \
-		../iso-customizer/dmidterminstallation.h
+		../iso-customizer/dmidterminstallation.h \
+		../iso-customizer/dpostcleaning.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../iso-customizer/mainwindow.cpp
 
 dchoicekernel.o: ../iso-customizer/dchoicekernel.cpp ../iso-customizer/dchoicekernel.h
